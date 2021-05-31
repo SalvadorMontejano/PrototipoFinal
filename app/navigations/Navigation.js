@@ -6,7 +6,7 @@ import Inicios from "./InicioStack";
 import Favoritos from "./FavoritoStack";
 import Disenios from "./DisenioStack";
 import Pedidos from "./PedidoStack";
-import Ajustes from "./AjusteStack";
+import AjusteAdmin from "./AjusteAdminStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,10 +36,37 @@ export default function Navigation(){
                 />
                 <Tab.Screen
                 name="ajuste"
-                  component={Ajustes}
+                  component={AjusteAdmin}
                 options={{ title: "AJUSTES" }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
     );
 }
+
+function screenOptions(route, color) {
+    let iconName;
+  
+    switch (route.name) {
+      case "inicio":
+        iconName = "home";
+        break;
+      case "favorito":
+        iconName = "account-group";
+        break;
+      case "disenio":
+        iconName = "cart";
+        break;
+      case "pedido":
+        iconName = "book";
+        break;
+      case "ajuste":
+        iconName = "chart-bar";
+        break;
+      default:
+        break;
+    }
+    return (
+      <Icon type="material-community" name={iconName} size={22} color={color} />
+    );
+  }

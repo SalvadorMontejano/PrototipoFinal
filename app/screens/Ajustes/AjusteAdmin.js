@@ -1,29 +1,43 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button } from 'react-native';
 
-export default function Disenio(){
+export default function Ajustes(){
     const navigation = useNavigation();
     return(
+
         <ScrollView centerContent={true} styles={styles.viewBody}>
-            <Text style={styles.textTitle}>-</Text>
+            <Text style={styles.textTitle}>Ajustes Del Administrador</Text>
 
             <View style={styles.viewBtn}>
                 <Button 
-                    icon={
-                        <Icon
-                        name="arrow-right"
-                        size={15}
-                        color="white"
-                        />}
-                    title="Siguiente"
+                    title="Agregar Postre"
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => navigation.navigate("agregar-postre")}
                 />
             </View>
+
+            <View style={styles.viewBtn}>
+                <Button 
+                    title="Editar Postre"
+                    buttonStyle={styles.btnStyle}
+                    containerStyle={styles.btnContainer}
+                    onPress={() => navigation.navigate("editar-postre")}
+                />
+            </View>
+
+            <View style={styles.viewBtn}>
+                <Button 
+                    title="Eliminar Postre"
+                    buttonStyle={styles.btnStyle}
+                    containerStyle={styles.btnContainer}
+                    onPress={() => navigation.navigate("eliminar-postre")}
+                />
+            </View>
+
+
         </ScrollView>
     );
 }
@@ -44,10 +58,10 @@ const styles = StyleSheet.create({
       marginBottom: 5
     },
     btnStyle: {
-      backgroundColor: "#E88B8B"
+      backgroundColor: "#00a680"
     },
     btnContainer: {
-      width: "10%"
+      width: "70%"
     },
     viewBtn: {
       flex: 1,
