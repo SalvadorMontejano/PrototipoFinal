@@ -1,21 +1,63 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text } from "react-native";
+import { StyleSheet, View, ScrollView, Text, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-//import { Button } from 'react-native';
-import { Card, ListItem, Button, Icon, SearchBar  } from 'react-native-elements'
+import { Card, ListItem, Button, Icon, SearchBar,Image  } from 'react-native-elements';
+import useFetch from "../../hooks/useFetch";
+
+import ListItems from "../../Componentes/Inicio/InicioConsultaListaProd";
+import { FlatList } from 'react-native-gesture-handler';
+
+
 export default function InicioPostre(){
+    const { loading, data: julitaspostres } = useFetch('http://localhost:3000/julitaspostres')
     const navigation = useNavigation();
     return(
       
         <ScrollView centerContent={true} styles={styles.viewBody}>
-            <Text style={styles.textTitle}>Bienvenido Julitas postres y mas</Text>
-
+            
               <View style={styles.viewBtn}>
+                
+
+                <Image
+                  source={require('../../../assets/JulitasLogo.png')}
+                  style={{ width: 300, height: 200 }}
+                />
+
+                <SearchBar 
+                  placeholder="Busca tu postre.."
+                  placeholderTextColor='#E88B8B'
+                  //onChangeText={this.updateSearch}
+                  lightTheme
+                  //value={search}                  
+                />
                               
-                <Card>
+                {loading ? <ActivityIndicator /> :   
+                  <FlatList
+                      style={styles.list}
+                      data={julitaspostres}                      
+                      renderItem={({ item }) =>
+                          <ListItems
+                              onPress={() => navigation.navigate('inicioDetalle', 
+                                { id: item.id, nomPostre: item.nomPostre, precio: item.precio, cantidad: item.cantidad, descripcion: item.descripcion})}
+                              id={item.id}
+                              nomPostre={item.nomPostre}
+                              precio={item.precio}
+                              cantidad={item.cantidad}
+                              descripcion={item.descripcion}
+                          >
+                          </ListItems>
+                      }
+                  />
+                } 
+              
+              <Card>
                   <Card.Title>Cupcake Chocolate $10</Card.Title>
-                  <Card.Divider/>
-                      <Card.Image source={require('../../../assets/cupcake.jpg')}>
+                 
+                  <Card.Divider
+                        
+                  />
+                                   
+                <Card.Image source={require('../../../assets/cupcake.jpg')}>
                     
                     <Button
                       icon={<Icon name='shopping-cart' color='#ffffff' />}
@@ -25,49 +67,16 @@ export default function InicioPostre(){
                       onPress={() => navigation.navigate("inicioDetalle")}
                     />
                     <Text style={{marginBottom: 10}}>
+                     
                       Cupcake de chocolate con merengue de chocolate.
                     </Text>
                   </Card.Image>
                 </Card>
 
-                <Card>
-                  <Card.Title>Bronie Volcan    $20</Card.Title>
-                  <Card.Divider/>
-                  <Card.Image source={require('../../../assets/BrownieVolcan.jpg')}>
-                  <Button
-                      icon={<Icon name='shopping-cart' color='#ffffff' />}
-                      buttonStyle={styles.btnStyle}
-                      containerStyle={styles.btnContainer}
-                      title='ORDENAR' 
-                      onPress={() => navigation.navigate("inicioDetalle")}                    
-                    />
-                    <Text style={{marginBottom: 10}}>
-                    Brownie de chocolate con elado sabor vainila.        .
-                    </Text>
-                    
-                  </Card.Image>
-                </Card>
-
-                <Card>
-                  <Card.Title>Cheese cake      $25</Card.Title>
-                  <Card.Divider/>
-                  <Card.Image source={require('../../../assets/cheeseCake.jpg')}>
-                  <Button
-                      icon={<Icon name='shopping-cart' color='#ffffff' />}
-                      buttonStyle={styles.btnStyle}
-                      containerStyle={styles.btnContainer}
-                      onPress={() => navigation.navigate("inicioDetalle")}
-                      title='ORDENAR' 
-                    />
-                    <Text style={{marginBottom: 10}}>
-                      Chesse Cake con mermelada de tu preferencia.      .
-                    </Text>
-                    
-                  </Card.Image>
-                </Card>
-
-               
+                
+          
             </View>
+            
 
         </ScrollView>
     );
@@ -99,5 +108,15 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: "center",
       marginBottom: 30
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#E88B8B',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+    },
+    list: {
+        alignSelf: 'stretch',
     }
   });
+  

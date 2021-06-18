@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from 'react-native';
 
 
-export default function Disenio(){
+export default function DisenioGenerales(){
     const navigation = useNavigation();
     return(
         <ScrollView centerContent={true} styles={styles.viewBody}>

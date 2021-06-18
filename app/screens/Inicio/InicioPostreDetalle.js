@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from "react-native";
 
-export default function Inicio(){
+export default function InicioPostreDetalle(){
     return(
         <View>
             <text>Julitas.Postresymas</text>

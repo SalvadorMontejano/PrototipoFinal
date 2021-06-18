@@ -1,12 +1,104 @@
 import React from 'react';
-import { View, Text } from "react-native";
+import { StyleSheet, View, ScrollView, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Card, ListItem, Button, Icon, SearchBar } from 'react-native-elements';
 
-export default function Favoritos(){
-    return(
-        <View>
-            <text>1.-Brownie Volcan</text>
-            <text>2.-Cupcake Chocolate</text>
-            <text>3.-Galletas Sandwich</text>
-        </View>
-    );
+
+export default function Favorito(){
+  const navigation = useNavigation();
+  return(
+    <ScrollView centerContent={true} styles={styles.viewBody}>
+      
+        <View style={styles.viewBtn}>
+                      
+          <Card>
+            <Card.Title>Cupcake Chocolate $10</Card.Title>
+            <Card.Divider/>
+                <Card.Image source={require('../../../assets/cupcake.jpg')}>
+              
+              <Button
+                icon={<Icon name='shopping-cart' color='#ffffff' />}
+                buttonStyle={styles.btnStyle}
+                containerStyle={styles.btnContainer}
+                title='ORDENAR'
+                onPress={() => navigation.navigate("favorito-Detalle")}
+              />
+              <Text style={{marginBottom: 10}}>
+                Cupcake de chocolate con merengue de chocolate.
+              </Text>
+            </Card.Image>
+          </Card>
+
+          <Card>
+            <Card.Title>Bronie Volcan    $20</Card.Title>
+            <Card.Divider/>
+            <Card.Image source={require('../../../assets/BrownieVolcan.jpg')}>
+            <Button
+                icon={<Icon name='shopping-cart' color='#ffffff' />}
+                buttonStyle={styles.btnStyle}
+                containerStyle={styles.btnContainer}
+                title='ORDENAR' 
+                onPress={() => navigation.navigate("favorito-Detalle")}                    
+              />
+              <Text style={{marginBottom: 10}}>
+              Brownie de chocolate con elado sabor vainila.        .
+              </Text>
+              
+            </Card.Image>
+          </Card>
+
+          <Card>
+            <Card.Title>Cheese cake      $25</Card.Title>
+            <Card.Divider/>
+            <Card.Image source={require('../../../assets/cheeseCake.jpg')}>
+            <Button
+                icon={<Icon name='shopping-cart' color='#ffffff' />}
+                buttonStyle={styles.btnStyle}
+                containerStyle={styles.btnContainer}
+                onPress={() => navigation.navigate("favorito-Detalle")}
+                title='ORDENAR' 
+              />
+              <Text style={{marginBottom: 10}}>
+                Chesse Cake con mermelada de tu preferencia.      .
+              </Text>
+              
+            </Card.Image>
+          </Card>
+
+        
+      </View>
+
+  </ScrollView>
+  );
 }
+
+const styles = StyleSheet.create({
+  viewBody: {
+    marginLeft: 30,
+    marginRight: 30
+  },
+  textTitle: {
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: "center",
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  btnAddMaestro: {
+    marginBottom: 5
+  },
+  btnStyle: {
+    backgroundColor: "#E88B8B",
+    borderRadius: 10
+  },
+  btnContainer: {
+    width: "50%"
+  },
+  viewBtn: {
+    flex: 1,
+    alignItems: "center",
+    marginBottom: 30
+  }
+});
+
+

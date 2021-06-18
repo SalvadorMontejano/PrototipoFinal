@@ -6,40 +6,39 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
-export default function DetallePostre({route}){
+export default function DetallePostreFavorito(){
+    const [cantidad,setCantidad] = useState();
+    const [nomPostre,setNomPostre] = useState();
     const navigation = useNavigation();
-    const {id,nomPostre,precio,cantidad,descripcion}=route.params
     return(
         <ScrollView centerContent={true} styles={styles.viewBody}>
          
           
-         
-          
-            <View style={styles.viewBtn}>
-            <Tile
+          <Tile
             imageSrc={require('../../../assets/cupcake.jpg')}
             style={styles.photo}
-            title={nomPostre}
+            title="Cupcake de chocolate"
             featured
-            caption={descripcion}
+            caption="cupcake de chocolate con merengue de chocolate y decorado con chispas"
             
-          ></Tile>;              
+          ></Tile>;
+          
+            <View style={styles.viewBtn}>              
               <Button
                 icon={
                   <Icon
-                    name="heart"
+                    name="eraser"
                     size={20}
                     color="white"
                   />
                 } 
-                title="  Agregar a Favorito"
+                title=" Eliminar"
                 buttonStyle={styles.btnStyle}
                 containerStyle={styles.btnContainer}
                 onPress={() => navigation.navigate("favorito")}
               />
                 
               <Text style={{marginBottom: 10}}>
-               
                 ¿Cuantas porciones vas a querer?
               </Text>
               <Input

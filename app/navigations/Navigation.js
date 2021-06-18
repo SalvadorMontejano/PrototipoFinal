@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Icon } from "react-native-elements";
 
 import Inicios from "./InicioStack";
 import Favoritos from "./FavoritoStack";
@@ -13,7 +14,19 @@ const Tab = createBottomTabNavigator();
 export default function Navigation(){
     return(
         <NavigationContainer>
-            <Tab.Navigator>
+          
+            <Tab.Navigator
+              
+              initialRouteName="inicio"
+              tabBarOptions={{
+                inactiveTintColor: "#E88B8B",
+                activeTintColor: "#5D5FEF"
+              }}
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ color }) => screenOptions(route, color)
+              })}
+            >
+             
                 <Tab.Screen
                     name="inicio"
                     component={Inicios}
@@ -52,16 +65,16 @@ function screenOptions(route, color) {
         iconName = "home";
         break;
       case "favorito":
-        iconName = "account-group";
+        iconName = "bookmark";
         break;
       case "disenio":
-        iconName = "cart";
+        iconName = "plus-circle";
         break;
       case "pedido":
-        iconName = "book";
+        iconName = "cart";
         break;
       case "ajuste":
-        iconName = "chart-bar";
+        iconName = "cog";
         break;
       default:
         break;

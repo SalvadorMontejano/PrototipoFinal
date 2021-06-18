@@ -1,34 +1,43 @@
 import React,{useState} from 'react';
-import { Image, StyleSheet, Text, View,ScrollView } from "react-native";
-import { Button,ListItem, Input,Divider,Tile } from 'react-native-elements';
-import { Header } from 'react-native-elements'
-import { useNavigation } from "@react-navigation/native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet, View, Text ,Modal, Alert, Pressable} from "react-native";
 
 
-export default function AjusteEliminarPostre(){
-    const navigation = useNavigation();
-    const [cvePostre,setCvePostre] = useState();
+export default function PostreModal(props){
+    
+    const {modalVisible, setModalVisible} = useState(false);
+
     return(
-        <ScrollView centerContent={true} styles={styles.viewBody}>      
-            <View style={styles.main}>
-                <Text style={styles.textTitle}>
-                    Busca el postre a eliminar
-                </Text>
-                <Input
-                    placeholder='Ingresa la clave del Postre'
-                    leftIcon={<Icon name='key' size={24} color='#E88B8B'/>}
-                    onChange={(e) => setCvePostre(e.nativeEvent.text)}
-                />
-                <Button
-                    icon={<Icon name="search" size={20} color="white"/>}
-                    title="Buscar"
-                    buttonStyle={styles.btnStyle}
-                    containerStyle={styles.btnContainer}
-                    onPress={() => navigation.navigate('editar-postre-Busqueda', {cvePostre:cvePostre})}
-                />
-            </View> 
-        </ScrollView>
+    
+    <View style={styles.centeredView}>
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+            }}
+        >
+        
+        <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+                <Text style={styles.modalText}>{props.cvePostre}</Text>
+                <Text style={styles.modalText}>{props.nomPostre}</Text>
+                <Text style={styles.modalText}>{props.precio}</Text>
+                <Text style={styles.modalText}>{props.descripcion}</Text>
+                <Text style={styles.modalText}>{props.cantidad}</Text>
+                <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    //onPress={() => setModalVisible(!modalVisible)}
+                >
+                    <Text style={styles.textStyle}>OK !</Text>
+                </Pressable>
+            </View>
+        </View>
+        </Modal>  
+              
+    </View>
+        
     );
 }
 
@@ -102,15 +111,5 @@ const styles = StyleSheet.create({
       modalText: {
         marginBottom: 15,
         textAlign: "center"
-      },
-      main: {
-        flex: 1,
-        margin: 40,
-      },
-    
-      image: {
-        width: 300,
-        height: 200,
-       
-      },  
+      }  
   });

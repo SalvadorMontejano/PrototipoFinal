@@ -1,13 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import Inicios from "../screens/Inicio/InicioPostre";
 import DetallePostre from "../screens/Detalle/DetallePostre";
 
 
 
+
 const Stack = createStackNavigator();
 
-export default function InicioStack() {
+export default function DetalleStack() {
     return(
         <Stack.Navigator>
             <Stack.Screen 
@@ -21,6 +23,7 @@ export default function InicioStack() {
                 component={DetallePostre}
                 options={{ title: "Detalles Postre" }}
             />
+         
             
         </Stack.Navigator>
     );
